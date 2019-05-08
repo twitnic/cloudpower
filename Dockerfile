@@ -7,4 +7,4 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update \
   && apt-get install -y ca-certificates curl php apache2 tzdata curl php-cli php-mbstring git unzip && \
-  apt-get install php-xml
+  apt-get install -y php-xml
