@@ -1,4 +1,6 @@
-FROM php:7.1-apache
+FROM ubuntu:18.04
+
+MAINTAINER twitnic <kontakt@twitnic.de>
 
 RUN apt-get update \
   && apt-get install --no-install-recommends -y \
