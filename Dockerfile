@@ -8,8 +8,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 COPY config/php.ini /usr/local/etc/php/php.ini
 
 RUN apt-get update \
-  && apt-get install -y apache2 git php php-mbstring php-soap php-ssh2 php-curl php-xml mydumper \
-  php-mysql php-xdebug php-mail php-mailparse \
+  && apt-get install -y apache2 \
+  software-properties-common \
+  git php php-mbstring php-soap php-ssh2 php-curl php-xml mydumper \
+  php-mysql php-xdebug php-mail php-mailparse curl \
   php-memcache php-memcached php-gd php-curl php-cli php-json php-bcmath unzip php-zip xclip
 
 # package install is finished, clean up
@@ -22,5 +24,12 @@ RUN mkdir -p /var/www/cloudpower
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=bin --filename=composer
 RUN composer self-update
 RUN git config --global http.postBuffer 524288000
+
+# MariaDB
+sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
+sudo add-apt-repository "deb [arch=amd64,arm64,ppc64el] http://mariadb.mirror.liquidtelecom.com/repo/10.4/ubuntu $(lsb_release -cs) main"
+sudo apt update
+sudo apt -y install mariadb-server mariadb-client
+sudo mysql_secure_installation
 
 RUN apt-get upgrade -y
