@@ -26,10 +26,10 @@ RUN composer self-update
 RUN git config --global http.postBuffer 524288000
 
 # MariaDB
-apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
-add-apt-repository "deb [arch=amd64,arm64,ppc64el] http://mariadb.mirror.liquidtelecom.com/repo/10.4/ubuntu $(lsb_release -cs) main"
-apt update
-apt -y install mariadb-server mariadb-client
-mysql_secure_installation
+RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
+RUN add-apt-repository "deb [arch=amd64,arm64,ppc64el] http://mariadb.mirror.liquidtelecom.com/repo/10.4/ubuntu $(lsb_release -cs) main"
+RUN apt update -y
+RUN apt -y install mariadb-server mariadb-client
+RUN mysql_secure_installation
 
 RUN apt-get upgrade -y
