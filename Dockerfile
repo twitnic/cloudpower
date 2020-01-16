@@ -30,6 +30,6 @@ RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24
 RUN add-apt-repository "deb [arch=amd64,arm64,ppc64el] http://mariadb.mirror.liquidtelecom.com/repo/10.4/ubuntu $(lsb_release -cs) main"
 RUN apt update -y
 RUN apt -y install mariadb-server mariadb-client
-RUN mysql_secure_installation
+RUN cat ./config/mysql_answers.txt | mysql_secure_installation 2>/dev/null
 
 RUN apt-get upgrade -y
