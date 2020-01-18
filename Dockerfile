@@ -5,14 +5,24 @@ MAINTAINER twitnic <kontakt@twitnic.de>
 ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN apt-get dist-upgrade -y
+
 COPY config/php.ini /usr/local/etc/php/php.ini
 
 RUN apt-get update \
   && apt-get install -y apache2 \
   software-properties-common \
   git php php-mbstring php-soap php-ssh2 php-curl php-xml mydumper \
-  php-mysql php-xdebug php-mail php-mailparse curl \
+  php-mysql php-xdebug php-mail php-mailparse curl wget \
   php-memcache php-memcached php-gd php-curl php-cli php-json php-bcmath unzip php-zip xclip
+
+RUN mkdir -p /tmp/sepa/libsepa
+RUN cd /tmp/sepa
+RUN wget https://libsepa.com/downloads/libsepa-2.17-64bit.tar.gz
+RUN tar -xvzf libsepa-2.17-64bit.tar.gz -C /tmp/sepa/libsepa
+RUN cp /tmp/sepa/libsepa/Linux/64bit/php-7.2/sepa.so /usr/lib/php/20170718/
 
 # package install is finished, clean up
 RUN apt-get clean # && rm -rf /var/lib/apt/lists/*
