@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 MAINTAINER twitnic <kontakt@twitnic.de>
 
@@ -8,6 +8,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update -y
 RUN apt-get upgrade -y
 RUN apt-get dist-upgrade -y
+
+RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
+    && localedef -i de_DE -c -f UTF-8 -A /usr/share/locale/locale.alias de_DE.UTF-8
+ENV LANG de_DE.utf8
 
 COPY config/php.ini /usr/local/etc/php/php.ini
 
