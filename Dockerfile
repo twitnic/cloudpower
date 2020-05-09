@@ -13,8 +13,6 @@ RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* 
     && localedef -i de_DE -c -f UTF-8 -A /usr/share/locale/locale.alias de_DE.UTF-8
 ENV LANG de_DE.utf8
 
-COPY config/php.ini /usr/local/etc/php/php.ini
-
 RUN apt-get update \
   && apt-get install -y apache2 \
   software-properties-common \
@@ -27,6 +25,9 @@ RUN cd /tmp/sepa
 RUN wget https://libsepa.com/downloads/libsepa-2.17-64bit.tar.gz
 RUN tar -xvzf libsepa-2.17-64bit.tar.gz -C /tmp/sepa/libsepa
 RUN cp /tmp/sepa/libsepa/Linux/64bit/php-7.2/sepa.so /usr/lib/php/20170718/
+
+COPY config/php.ini /usr/local/etc/php/php.ini
+COPY config/xdebug.ini /etc/php/7.2/mods-available/xdebug.ini
 
 # package install is finished, clean up
 RUN apt-get clean # && rm -rf /var/lib/apt/lists/*
