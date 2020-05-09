@@ -36,6 +36,7 @@ RUN a2ensite cloudpower.conf
 RUN a2dissite 000-default.conf
 ENV APACHE_SERVERNAME docker.intra
 ENV APACHE_SERVERALIAS docker.local
+echo "ServerName docker.intra" | sudo tee /etc/apache2/conf-available/servername.conf
 RUN apache2ctl restart
 
 
