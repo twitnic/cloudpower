@@ -1,6 +1,8 @@
 # cloudpower
 Docker Setup
 
+Travis Build: [![Build Status](https://travis-ci.org/twitnic/cloudpower.svg?branch=master)](https://travis-ci.org/twitnic/cloudpower)
+
 * apache2
 * php
 * php-dom
