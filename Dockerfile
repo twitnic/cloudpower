@@ -34,7 +34,10 @@ COPY config/cloudpower.conf /etc/apache2/sites-available/cloudpower.conf
 
 RUN a2ensite cloudpower.conf
 RUN a2dissite 000-default.conf
-RUN service apache2 reload
+ENV APACHE_SERVERNAME docker.intra
+ENV APACHE_SERVERALIAS docker.local
+RUN apache2ctl restart
+
 
 # package install is finished, clean up
 RUN apt-get clean # && rm -rf /var/lib/apt/lists/*
