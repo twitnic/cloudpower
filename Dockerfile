@@ -30,6 +30,10 @@ RUN cp /tmp/sepa/libsepa/Linux/64bit/php-7.2/sepa.so /usr/lib/php/20170718/
 
 COPY config/php.ini /usr/local/etc/php/php.ini
 COPY config/xdebug.ini /etc/php/7.2/mods-available/xdebug.ini
+COPY config/cloudpower.conf /etc/apache2/sites-available/cloudpower.conf
+
+RUN a2ensite cloudpower.conf
+RUN a2dissite 000-default.conf
 
 # package install is finished, clean up
 RUN apt-get clean # && rm -rf /var/lib/apt/lists/*
