@@ -41,3 +41,6 @@ RUN composer self-update
 RUN git config --global http.postBuffer 524288000
 
 RUN apt-get upgrade -y
+
+EXPOSE 80
+CMD apachectl -D FOREGROUND
