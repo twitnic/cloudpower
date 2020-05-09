@@ -34,6 +34,8 @@ COPY config/cloudpower.conf /etc/apache2/sites-available/cloudpower.conf
 
 RUN a2ensite cloudpower.conf
 RUN a2dissite 000-default.conf
+RUN a2enmod rewrite
+RUN a2enmod vhost_alias
 ENV APACHE_SERVERNAME docker.intra
 ENV APACHE_SERVERALIAS docker.local
 RUN echo "ServerName docker.intra" | tee /etc/apache2/conf-available/servername.conf
