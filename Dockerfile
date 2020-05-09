@@ -2,6 +2,8 @@ FROM ubuntu:18.04
 
 MAINTAINER twitnic <kontakt@twitnic.de>
 
+ENV DEBIAN_FRONTEND noninteractive
+
 ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
