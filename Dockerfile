@@ -55,5 +55,5 @@ RUN git config --global http.postBuffer 524288000
 
 RUN apt-get upgrade -y
 
-EXPOSE 80
+EXPOSE 80 9000
 CMD apachectl -D FOREGROUND
