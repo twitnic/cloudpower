@@ -12,7 +12,7 @@ RUN apt-get upgrade -y
 RUN apt-get dist-upgrade -y
 
 RUN mkdir /root/.ssh
-RUN touch ~/.ssh/known_hosts && if [ $(grep -c 'github.com ssh-rsa' ~/.ssh/known_hosts) -lt 1 ]; then KEYS=$(KEYS=$(ssh-keyscan github.com 2>&1 | grep -v '#'); ssh-keygen -lf <(echo $KEYS) || echo $KEYS); if [[ $KEYS =~ '(RSA)' ]]; then if [ $(curl -s https://help.github.com/en/github/authenticating-to-github/githubs-ssh-key-fingerprints | grep -c $(echo $KEYS | awk '{print $2}')) -gt 0 ]; then echo '[GitHub key successfully verified]' && ssh-keyscan github.com 1>~/.ssh/known_hosts; fi; else echo \"ssh-keygen -lf failed:\\n$KEYS\"; exit 1; fi; unset KEYS; fi
+RUN touch ~/.ssh/known_hosts && if [ $(grep -c 'github.com ssh-rsa' ~/.ssh/known_hosts) -lt 1 ]; then KEYS=$(KEYS=$(ssh-keyscan github.com 2>&1 | grep -v '#'); ssh-keygen -lf <(echo $KEYS) || echo $KEYS); if [[ $KEYS =~ '(RSA)' ]]; then if [ $(curl -s https://help.github.com/en/github/authenticating-to-github/githubs-ssh-key-fingerprints | grep -c $(echo $KEYS | awk '{print $2}')) -gt 0 ]; then echo '[GitHub key successfully verified]' && ssh-keyscan github.com 1>~/.ssh/known_hosts; fi; else echo \"ssh-keygen -lf failed:\\n$KEYS\"; exit 1; fi; unset KEYS; fi;
 
 RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
     && localedef -i de_DE -c -f UTF-8 -A /usr/share/locale/locale.alias de_DE.UTF-8
