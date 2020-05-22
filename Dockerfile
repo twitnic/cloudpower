@@ -21,7 +21,7 @@ ENV LANG de_DE.utf8
 RUN apt-get update \
   && apt-get install -y apache2 \
   software-properties-common nano \
-  git php php-mbstring php-soap php-ssh2 php-curl php-xml mydumper \
+  git php-dev php-mbstring php-soap php-ssh2 php-curl php-xml mydumper \
   php-mysql php-xdebug php-mail php-mailparse curl wget \
   php-memcache php-memcached php-gd php-curl php-cli php-json php-bcmath unzip php-zip xclip
 
