@@ -25,6 +25,9 @@ RUN apt-get update \
   php-mysql php-xdebug php-mail php-mailparse curl wget \
   php-memcache php-memcached php-gd php-curl php-cli php-json php-bcmath unzip php-zip xclip
 
+RUN apt-get install libmcrypt-dev
+RUN pecl install mcrypt-1.0.1 && docker-php-ext-enable mcrypt
+
 RUN mkdir -p /tmp/sepa/libsepa
 RUN cd /tmp/sepa
 RUN wget https://libsepa.com/downloads/libsepa-2.17-64bit.tar.gz
