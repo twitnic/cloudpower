@@ -26,7 +26,9 @@ RUN apt-get update \
   php-memcache php-memcached php-gd php-curl php-cli php-json php-bcmath unzip php-zip xclip
 
 RUN apt-get install libmcrypt-dev -y
-RUN pecl install mcrypt-1.0.1 && docker-php-ext-enable mcrypt
+RUN pecl install mcrypt-1.0.1
+RUN echo "extension=mcrypt.so" >> /etc/php/7.2/mods-available/mcrypt.ini
+RUN phpenmod mcrypt
 
 RUN mkdir -p /tmp/sepa/libsepa
 RUN cd /tmp/sepa
