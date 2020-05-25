@@ -14,15 +14,15 @@ services:
     depends_on:
       - database
   database:
-    image: mysql:5.7
+    image: mariadb:10.4
     volumes:
       - ./db:/var/lib/mysql
-    command: --sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+    command: mysqld --sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
     environment:
-      - "MYSQL_ALLOW_EMPTY_PASSWORD=yes"
+      - "MYSQL_ROOT_PASSWORD=ROOT_ACCESS_PASSWORD"
+      - "TZ=Europe/Berlin"
       - "MYSQL_DATABASE=frontend"
-      - "MYSQL_USER=root"
+      - "MYSQL_USER=foobar"
       - "MYSQL_PASSWORD=foobar"
-      - "MYSQL_ROOT_PASSWORD=foobar"
     ports:
       - "33061:3306"
