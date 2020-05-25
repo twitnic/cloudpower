@@ -4,7 +4,7 @@ services:
     image: twitnic/cloudpower:latest
     working_dir: /var/www/cloudpower
     volumes:
-      - ./frontend:/var/www/cloudpower
+      - ../frontend:/var/www/cloudpower
       - ./ssh-keys:/root/.ssh
     environment:
       - DB_HOST=database
