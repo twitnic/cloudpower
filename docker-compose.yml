@@ -26,9 +26,6 @@ services:
       - "MYSQL_PASSWORD=foobar"
     ports:
       - "33061:3306"
-    depends_on:
-      - app
-      - phpmyadmin
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     ports:
