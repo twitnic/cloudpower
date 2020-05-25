@@ -17,7 +17,7 @@ services:
     image: mariadb:10.4
     volumes:
       - ./db:/var/lib/mysql
-    command: mysqld --sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+    command: mysqld --sql_mode=STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
     environment:
       - "MYSQL_ROOT_PASSWORD=foobar"
       - "TZ=Europe/Berlin"
@@ -26,3 +26,12 @@ services:
       - "MYSQL_PASSWORD=foobar"
     ports:
       - "33061:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - 8000:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=database
+    depends_on:
+      - database
