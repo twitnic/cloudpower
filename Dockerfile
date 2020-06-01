@@ -13,7 +13,6 @@ RUN apt-get dist-upgrade -y
 
 RUN mkdir /root/.ssh
 RUN touch ~/.ssh/known_hosts
-RUN ssh-keyscan github.com > /root/.ssh/known_hosts
 
 RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
     && localedef -i de_DE -c -f UTF-8 -A /usr/share/locale/locale.alias de_DE.UTF-8
@@ -22,9 +21,11 @@ ENV LANG de_DE.utf8
 RUN apt-get update \
   && apt-get install -y apache2 \
   software-properties-common nano \
-  git git-core openssh-client php php-dev php-mbstring php-soap php-intl php-ssh2 php-curl php-xml mydumper \
+  git git-core ssh openssh-client php php-dev php-mbstring php-soap php-intl php-ssh2 php-curl php-xml mydumper \
   php-mysql php-xdebug php-mail php-mailparse mariadb-client curl wget \
   php-memcache php-memcached php-gd php-curl php-cli php-json php-bcmath unzip php-zip xclip
+
+RUN ssh-keyscan github.com > /root/.ssh/known_hosts
 
 RUN apt-get install libmcrypt-dev -y
 RUN pecl install mcrypt-1.0.1
