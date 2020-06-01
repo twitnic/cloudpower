@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.8"
 services:
   app:
     image: twitnic/cloudpower:latest
@@ -14,6 +14,13 @@ services:
       - "9000:9000"
     depends_on:
       - database
+    secrets:
+      - source: id_rsa
+        target: id_rsa_secret
+        uid: '103'
+        gid: '103'
+        mode: 0440
+    command: sh -c "chmod eval `ssh-agent -s` && ssh-agent -s && ssh-add -k /run/secrets/id_rsa_secret"
   database:
     image: mariadb:10.4
     volumes:
@@ -36,6 +43,6 @@ services:
       - PMA_HOST=database
     depends_on:
       - database
-  secrets:
-    id_rsa:
-      file: "~/.ssh/id_rsa.pub"
+secrets:
+  id_rsa:
+    file: "~/.ssh/id_rsa.pub"
