@@ -35,3 +35,6 @@ services:
       - PMA_HOST=database
     depends_on:
       - database
+  secrets:
+    id_rsa:
+      file: "~/.ssh/id_rsa"
