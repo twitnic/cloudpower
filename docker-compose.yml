@@ -10,6 +10,7 @@ services:
       - DB_HOST=database
     ports:
       - "80:80"
+      - "443:443"
       - "9000:9000"
     depends_on:
       - database
@@ -37,4 +38,4 @@ services:
       - database
   secrets:
     id_rsa:
-      file: "~/.ssh/id_rsa"
+      file: "~/.ssh/id_rsa.pub"
