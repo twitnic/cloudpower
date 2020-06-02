@@ -5,7 +5,6 @@ services:
     working_dir: /var/www/cloudpower
     volumes:
       - ../frontend:/var/www/cloudpower
-      - ./ssh-keys:/root/.ssh
     environment:
       - DB_HOST=database
     ports:
@@ -20,7 +19,7 @@ services:
         uid: '103'
         gid: '103'
         mode: 0440
-    command: sh -c "chmod eval `ssh-agent -s` && ssh-agent -s && ssh-add -k /run/secrets/id_rsa_secret"
+    command: sh -c "eval `ssh-agent -s` && ssh-agent -s && ssh-add -k /run/secrets/id_rsa_secret"
   database:
     image: mariadb:10.4
     volumes:
@@ -45,4 +44,4 @@ services:
       - database
 secrets:
   id_rsa:
-    file: "~/.ssh/id_rsa.pub"
+    file: ~/.ssh/id_rsa.pub
