@@ -5,21 +5,16 @@ services:
     working_dir: /var/www/cloudpower
     volumes:
       - ../frontend:/var/www/cloudpower
+      - $SSH_AUTH_SOCK:/tmp/agent.sock
     environment:
       - DB_HOST=database
+      - SSH_AUTH_SOCK=/tmp/agent.sock
     ports:
       - "80:80"
       - "443:443"
       - "9000:9000"
     depends_on:
       - database
-    secrets:
-      - source: id_rsa
-        target: id_rsa_secret
-        uid: '103'
-        gid: '103'
-        mode: 0440
-    command: sh -c "eval `ssh-agent -s` && ssh-agent -s && ssh-add -k /run/secrets/id_rsa_secret"
   database:
     image: mariadb:10.4
     volumes:
@@ -42,6 +37,3 @@ services:
       - PMA_HOST=database
     depends_on:
       - database
-secrets:
-  id_rsa:
-    file: ~/.ssh/id_rsa.pub
