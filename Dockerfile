@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1.0.0-experimental
+
 FROM ubuntu:18.04
 
 MAINTAINER twitnic <kontakt@twitnic.de>
@@ -13,6 +15,9 @@ RUN apt-get dist-upgrade -y
 
 RUN mkdir /root/.ssh
 RUN touch ~/.ssh/known_hosts
+
+# Create testing directory
+RUN mkdir -p /var/www/cloudpower
 
 RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
     && localedef -i de_DE -c -f UTF-8 -A /usr/share/locale/locale.alias de_DE.UTF-8
@@ -54,9 +59,6 @@ RUN apache2ctl restart
 
 # package install is finished, clean up
 RUN apt-get clean # && rm -rf /var/lib/apt/lists/*
-
-# Create testing directory
-RUN mkdir -p /var/www/cloudpower
 
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=bin --filename=composer
