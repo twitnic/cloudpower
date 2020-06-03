@@ -19,7 +19,7 @@ script:
   - export DOCKER_CLI_EXPERIMENTAL=enabled #enable experimental features
   - 'docker version'
   # build latest image always
-  - DOCKER_BUILDKIT=1 docker build -t $DOCKER_REPO_SLUG:latest .
+  - DOCKER_BUILDKIT=1 docker build --ssh default -t $DOCKER_REPO_SLUG:latest .
   # build the tagged image
   - if [[ $TRAVIS_TAG = $TRAVIS_BRANCH ]]; then docker build -t $DOCKER_REPO_SLUG:$TRAVIS_BRANCH .; else true ; fi
 
