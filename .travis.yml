@@ -10,6 +10,8 @@ env:
     - DOCKER_BUILDKIT=1
     - COMPOSE_DOCKER_CLI_BUILD=1
     - "DOCKER_COMPOSE_VERSION=1.25.5"
+    - LANG=de_DE.UTF-8
+    - LC_ALL=de_DE.UTF-8
 
 before_install:
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
