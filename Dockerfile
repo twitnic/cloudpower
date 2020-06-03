@@ -1,5 +1,3 @@
-# syntax=docker/dockerfile:1.0.0-experimental
-
 FROM ubuntu:18.04
 
 MAINTAINER twitnic <kontakt@twitnic.de>
