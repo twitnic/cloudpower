@@ -25,7 +25,7 @@ script:
 
 after_success:
   # IMPORTANT! Add the environment variables in Travis Build Environment (one time!)
-  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   # push to latest if master branch
   - if [[ $TRAVIS_BRANCH = master ]]; then docker push $DOCKER_REPO_SLUG:latest; else true; fi
   # push tag as well
