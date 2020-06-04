@@ -5,10 +5,9 @@ services:
     working_dir: /var/www/cloudpower
     volumes:
       - ../frontend:/var/www/cloudpower
-      - $SSH_AUTH_SOCK:/tmp/agent.sock
+      - ./ssh-keys:/root/.ssh
     environment:
       - DB_HOST=database
-      - SSH_AUTH_SOCK=/tmp/agent.sock
     ports:
       - "80:80"
       - "443:443"
