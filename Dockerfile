@@ -24,13 +24,15 @@ ENV LANG de_DE.utf8
 RUN apt-get update \
   && apt-get install --no-install-recommends -y apache2 \
   software-properties-common nano \
-  git git-core ssh openssh-client php php-dev php-mbstring php-imap php-soap php-intl php-ssh2 php-curl php-xml mydumper \
+  git git-core make ssh openssh-client php php-dev php-mbstring php-imap php-soap php-intl php-ssh2 php-curl php-xml mydumper \
   php-mysql php-xdebug php-pear php-mail php-mailparse mariadb-client curl wget \
   php-memcache php-memcached php-gd php-curl php-cli php-json php-bcmath unzip php-zip xclip
 
 RUN ssh-keyscan github.com > /root/.ssh/known_hosts
 
 RUN apt-get install --no-install-recommends libmcrypt-dev -y
+
+RUN pecl channel-update pecl.php.net
 RUN pecl install mcrypt-1.0.1
 RUN echo "extension=mcrypt.so" >> /etc/php/7.2/mods-available/mcrypt.ini
 RUN phpenmod mcrypt
