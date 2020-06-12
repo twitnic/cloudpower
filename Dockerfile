@@ -25,7 +25,7 @@ RUN apt-get update \
   && apt-get install --no-install-recommends -y apache2 \
   software-properties-common nano \
   git git-core ssh openssh-client php php-dev php-mbstring php-imap php-soap php-intl php-ssh2 php-curl php-xml mydumper \
-  php-mysql php-xdebug php-mail php-mailparse mariadb-client curl wget \
+  php-mysql php-xdebug php-pear php-mail php-mailparse mariadb-client curl wget \
   php-memcache php-memcached php-gd php-curl php-cli php-json php-bcmath unzip php-zip xclip
 
 RUN ssh-keyscan github.com > /root/.ssh/known_hosts
