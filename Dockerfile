@@ -51,9 +51,9 @@ RUN a2ensite cloudpower.conf
 RUN a2dissite 000-default.conf
 RUN a2enmod rewrite
 RUN a2enmod vhost_alias
-ENV APACHE_SERVERNAME docker.intra
+ENV APACHE_SERVERNAME host.docker.internal
 ENV APACHE_SERVERALIAS docker.local
-RUN echo "ServerName docker.intra" | tee /etc/apache2/conf-available/servername.conf
+RUN echo "ServerName host.docker.internal" | tee /etc/apache2/conf-available/servername.conf
 RUN apache2ctl restart
 
 
