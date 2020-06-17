@@ -4,15 +4,13 @@ services:
     image: twitnic/cloudpower:latest
     working_dir: /var/www/cloudpower
     volumes:
-      - ../frontend:/var/www/cloudpower
+      - ../frontend:/var/www/cloudpower:delegated
       - ~/.ssh/id_rsa:/root/.ssh/id_rsa
       - ~/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub
     environment:
       - DB_HOST=database
     ports:
       - "80:80"
-      - "443:443"
-      - "9000:9000"
     depends_on:
       - database
   database:
@@ -31,7 +29,7 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     ports:
-      - 8000:80
+      - 8080:80
     environment:
       - PMA_ARBITRARY=1
       - PMA_HOST=database
