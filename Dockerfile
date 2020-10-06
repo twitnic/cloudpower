@@ -33,18 +33,19 @@ RUN ssh-keyscan github.com > /root/.ssh/known_hosts
 RUN apt-get install --no-install-recommends libmcrypt-dev -y
 
 RUN pecl channel-update pecl.php.net
-RUN pecl install mcrypt-1.0.1
-RUN echo "extension=mcrypt.so" >> /etc/php/7.2/mods-available/mcrypt.ini
+RUN mkdir -p /tmp/pear/cache
+RUN pecl install mcrypt-1.0.3
+RUN echo "extension=mcrypt.so" >> /etc/php/7.4/mods-available/mcrypt.ini
 RUN phpenmod mcrypt
 
 RUN mkdir -p /tmp/sepa/libsepa
 RUN cd /tmp/sepa
 RUN wget https://libsepa.com/downloads/libsepa-2.17-64bit.tar.gz
 RUN tar -xvzf libsepa-2.17-64bit.tar.gz -C /tmp/sepa/libsepa
-RUN cp /tmp/sepa/libsepa/Linux/64bit/php-7.2/sepa.so /usr/lib/php/20170718/
+RUN cp /tmp/sepa/libsepa/Linux/64bit/php-7.4/sepa.so /usr/lib/php/20170718/
 
 COPY config/php.ini /usr/local/etc/php/php.ini
-COPY config/xdebug.ini /etc/php/7.2/mods-available/xdebug.ini
+COPY config/xdebug.ini /etc/php/7.4/mods-available/xdebug.ini
 COPY config/cloudpower.conf /etc/apache2/sites-available/cloudpower.conf
 
 RUN a2ensite cloudpower.conf
