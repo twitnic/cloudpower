@@ -42,7 +42,7 @@ RUN mkdir -p /tmp/sepa/libsepa
 RUN cd /tmp/sepa
 RUN wget https://libsepa.com/downloads/libsepa-2.17-64bit.tar.gz
 RUN tar -xvzf libsepa-2.17-64bit.tar.gz -C /tmp/sepa/libsepa
-RUN cp /tmp/sepa/libsepa/Linux/64bit/php-7.4/sepa.so /usr/lib/php/20190902/
+RUN cp /tmp/sepa/libsepa/Linux/64bit/php-7.3/sepa.so /usr/lib/php/20190902/
 
 COPY config/php.ini /usr/local/etc/php/php.ini
 COPY config/xdebug.ini /etc/php/7.4/mods-available/xdebug.ini
