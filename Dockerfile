@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:18.04
 
 MAINTAINER twitnic <kontakt@twitnic.de>
 
@@ -21,13 +21,25 @@ RUN apt-get update && apt-get install --no-install-recommends -y locales && rm -
     && localedef -i de_DE -c -f UTF-8 -A /usr/share/locale/locale.alias de_DE.UTF-8
 ENV LANG de_DE.utf8
 
+RUN add-apt-repository ppa:ondrej/php
+
 RUN apt-get update \
   && apt-get install --no-install-recommends -y apache2 \
   software-properties-common nano \
-  git git-core make ssh openssh-client php7.3 php-dev php-mbstring php-imap php-soap php-intl \
-  php-ssh2 php-curl php-xml mydumper \
-  php-mysql php-xdebug php-pear php-mail php-mailparse mariadb-client curl wget \
-  php-memcache php-memcached php-gd php-cli php-json php-bcmath unzip php-zip xclip
+  git git-core make ssh openssh-client php7.3 php-dev php7.3-mbstring php-imap php7.3-soap php-intl php7.3-ssh2 php7.3-curl php7.3-xml mydumper \
+  php7.3-mysql php7.3-xdebug php-pear php7.3-mail php7.3-mailparse mariadb-client curl wget \
+  php7.3-memcache php7.3-memcached php7.3-gd php7.3-cli php7.3-json php7.3-bcmath unzip php7.3-zip xclip
+
+RUN a2dismod php7.2
+RUN a2dismod php7.4
+
+RUN update-alternatives --set php /usr/bin/php7.3
+RUN update-alternatives --set phar /usr/bin/phar7.3
+RUN update-alternatives --set phar.phar /usr/bin/phar.phar7.3
+RUN update-alternatives --set phpize /usr/bin/phpize7.3
+RUN update-alternatives --set php-config /usr/bin/php-config7.3
+
+RUN apt-get update && apt-get upgrade
 
 RUN ssh-keyscan github.com > /root/.ssh/known_hosts
 
