@@ -24,9 +24,10 @@ ENV LANG de_DE.utf8
 RUN apt-get update \
   && apt-get install --no-install-recommends -y apache2 \
   software-properties-common nano \
-  git git-core make ssh openssh-client php php-dev php-mbstring php-imap php-soap php-intl php-ssh2 php-curl php-xml mydumper \
-  php-mysql php-xdebug php-pear php-mail php-mailparse mariadb-client curl wget \
-  php-memcache php-memcached php-gd php-curl php-cli php-json php-bcmath unzip php-zip xclip
+  git git-core make ssh openssh-client php7.3 php-dev7.3 php7.3-mbstring php7.3-imap php7.3-soap php7.3-intl \
+  php7.3-ssh2 php7.3-curl php7.3-xml mydumper \
+  php7.3-mysql php7.3-xdebug php7.3-pear php7.3-mail php7.3-mailparse mariadb-client curl wget \
+  php7.3-memcache php7.3-memcached php7.3-gd php7.3-curl php7.3-cli php7.3-json php7.3-bcmath unzip php-zip xclip
 
 RUN ssh-keyscan github.com > /root/.ssh/known_hosts
 
