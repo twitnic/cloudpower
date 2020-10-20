@@ -24,7 +24,7 @@ ENV LANG de_DE.utf8
 RUN apt-get update \
   && apt-get install --no-install-recommends -y apache2 \
   software-properties-common nano \
-  git git-core make ssh openssh-client php7.3 php-dev php7.3-mbstring php-imap php-soap php-intl \
+  git git-core make ssh openssh-client php7.3 php-dev php-mbstring php-imap php-soap php-intl \
   php-ssh2 php-curl php-xml mydumper \
   php-mysql php-xdebug php-pear php-mail php-mailparse mariadb-client curl wget \
   php-memcache php-memcached php-gd php-cli php-json php-bcmath unzip php-zip xclip
