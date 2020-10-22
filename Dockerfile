@@ -33,8 +33,8 @@ RUN apt-get update \
   php7.3-mysql php7.3-xdebug php-pear php7.3-mail php7.3-mailparse mariadb-client curl wget \
   php7.3-memcache php7.3-memcached php7.3-gd php7.3-cli php7.3-json php7.3-bcmath unzip php7.3-zip xclip
 
-RUN a2dismod php7.2
-#RUN a2dismod php7.4
+#RUN a2dismod php7.2
+RUN a2dismod php7.4
 
 RUN update-alternatives --set php /usr/bin/php7.3
 RUN update-alternatives --set phar /usr/bin/phar7.3
