@@ -21,8 +21,10 @@ RUN apt-get update && apt-get install --no-install-recommends -y locales && rm -
     && localedef -i de_DE -c -f UTF-8 -A /usr/share/locale/locale.alias de_DE.UTF-8
 ENV LANG de_DE.utf8
 
-RUN apt-get install --no-install-recommends -y software-properties-common
+RUN apt update && apt dist-upgrade -y
+RUN apt install software-properties-common -y
 RUN add-apt-repository ppa:ondrej/php
+RUN apt update
 
 RUN apt-get update \
   && apt-get install --no-install-recommends -y apache2 \
