@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 MAINTAINER twitnic <kontakt@twitnic.de>
 
@@ -51,8 +51,9 @@ RUN apt-get install --no-install-recommends libmcrypt-dev -y
 
 RUN pecl channel-update pecl.php.net
 RUN mkdir -p /tmp/pear/cache
-RUN pecl install mcrypt-1.0.3
+RUN pecl install mcrypt-1.0.1
 RUN echo "extension=mcrypt.so" >> /etc/php/7.3/mods-available/mcrypt.ini
+# /usr/lib/php/20190902/mcrypt.so
 RUN phpenmod mcrypt
 
 RUN mkdir -p /tmp/sepa/libsepa
@@ -60,6 +61,7 @@ RUN cd /tmp/sepa
 RUN wget https://libsepa.com/downloads/libsepa-2.17-64bit.tar.gz
 RUN tar -xvzf libsepa-2.17-64bit.tar.gz -C /tmp/sepa/libsepa
 RUN cp /tmp/sepa/libsepa/Linux/64bit/php-7.3/sepa.so /usr/lib/php/20190902/
+RUN cp /tmp/sepa/libsepa/Linux/64bit/php-7.3/sepa.so /usr/lib/php/20180731/
 
 COPY config/php.ini /usr/local/etc/php/php.ini
 COPY config/xdebug.ini /etc/php/7.3/mods-available/xdebug.ini
