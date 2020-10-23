@@ -51,10 +51,12 @@ RUN apt-get install --no-install-recommends libmcrypt-dev -y
 
 RUN pecl channel-update pecl.php.net
 RUN mkdir -p /tmp/pear/cache
-RUN pecl install mcrypt-1.0.2
+RUN pecl install mcrypt-1.0.3
 RUN echo "extension=mcrypt.so" >> /etc/php/7.3/mods-available/mcrypt.ini
 # /usr/lib/php/20190902/mcrypt.so
 RUN phpenmod mcrypt
+
+RUN apt-get update -y && apt-get upgrade -y
 
 RUN mkdir -p /tmp/sepa/libsepa
 RUN cd /tmp/sepa
