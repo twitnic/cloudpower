@@ -40,8 +40,8 @@ RUN a2enmod php7.3
 RUN update-alternatives --set php /usr/bin/php7.3
 RUN update-alternatives --set phar /usr/bin/phar7.3
 RUN update-alternatives --set phar.phar /usr/bin/phar.phar7.3
-#RUN update-alternatives --set phpize /usr/bin/phpize7.3
-#RUN update-alternatives --set php-config /usr/bin/php-config7.3
+RUN update-alternatives --set phpize /usr/bin/phpize7.3
+RUN update-alternatives --set php-config /usr/bin/php-config7.3
 
 RUN apt-get update -y && apt-get upgrade -y
 
@@ -51,7 +51,7 @@ RUN apt-get install --no-install-recommends libmcrypt-dev -y
 
 RUN pecl channel-update pecl.php.net
 RUN mkdir -p /tmp/pear/cache
-RUN pecl install mcrypt-1.0.1
+RUN pecl install mcrypt-1.0.2
 RUN echo "extension=mcrypt.so" >> /etc/php/7.3/mods-available/mcrypt.ini
 # /usr/lib/php/20190902/mcrypt.so
 RUN phpenmod mcrypt
