@@ -29,7 +29,7 @@ RUN apt update
 RUN apt-get update \
   && apt-get install --no-install-recommends -y apache2 \
   software-properties-common nano \
-  git git-core make ssh openssh-client php7.3 php-dev php7.3-mbstring php-imap php7.3-soap php-intl php7.3-ssh2 php7.3-curl php7.3-xml mydumper \
+  git git-core make ssh openssh-client php7.3 php7.3-dev php7.3-mbstring php-imap php7.3-soap php-intl php7.3-ssh2 php7.3-curl php7.3-xml mydumper \
   php7.3-mysql php7.3-xdebug php-pear php7.3-mail php7.3-mailparse mariadb-client curl wget \
   php7.3-memcache php7.3-memcached php7.3-gd php7.3-cli php7.3-json php7.3-bcmath unzip php7.3-zip xclip
 
