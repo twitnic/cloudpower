@@ -58,11 +58,11 @@ RUN phpenmod mcrypt
 
 RUN apt-get update -y && apt-get upgrade -y
 
-RUN mkdir -p /tmp/sepa/libsepa
-RUN cd /tmp/sepa
-RUN wget https://libsepa.com/downloads/libsepa-2.25-64bit.tar.gz
-RUN tar -xvzf libsepa-2.25-64bit.tar.gz -C /tmp/sepa/libsepa
-RUN cp /tmp/sepa/libsepa/Linux/64bit/php-8.1/sepa.so /usr/lib/php/20210902/
+#RUN mkdir -p /tmp/sepa/libsepa
+#RUN cd /tmp/sepa
+#RUN wget https://libsepa.com/downloads/libsepa-2.25-64bit.tar.gz
+#RUN tar -xvzf libsepa-2.25-64bit.tar.gz -C /tmp/sepa/libsepa
+#RUN cp /tmp/sepa/libsepa/Linux/64bit/php-8.1/sepa.so /usr/lib/php/20210902/
 
 COPY config/php.ini /usr/local/etc/php/php.ini
 COPY config/xdebug.ini /etc/php/8.1/mods-available/xdebug.ini
