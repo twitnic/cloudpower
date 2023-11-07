@@ -25,5 +25,10 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v5
         with:
+          context: .
           push: true
           tags: latest
+          build-args: |
+            BUILD_FROM=TAG
+            BUILD_ID=${{ env.BUILD_ID }}
+        if: success()
