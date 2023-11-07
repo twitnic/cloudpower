@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 MAINTAINER twitnic <kontakt@twitnic.de>
 
@@ -23,25 +23,25 @@ ENV LANG de_DE.utf8
 
 RUN apt update && apt dist-upgrade -y
 RUN apt install software-properties-common -y
-RUN add-apt-repository ppa:ondrej/php
+#RUN add-apt-repository ppa:ondrej/php
 RUN apt update
 
 RUN apt-get update \
   && apt-get install --no-install-recommends -y apache2 \
   software-properties-common nano \
-  git git-core make ssh openssh-client php7.3 php7.3-dev php7.3-mbstring php7.3-imap php7.3-soap php-intl php7.3-ssh2 php7.3-curl php7.3-xml mydumper \
-  php7.3-mysql php7.3-intl php7.3-xdebug php-pear php7.3-mail php7.3-mailparse mariadb-client curl wget \
-  php7.3-memcache php7.3-memcached php7.3-gd php7.3-cli php7.3-json php7.3-bcmath unzip php7.3-zip xclip
+  git git-core make ssh openssh-client php8.1 php8.1-dev php8.1-mbstring php8.1-imap php8.1-soap php-intl php8.1-ssh2 php8.1-curl php8.1-xml mydumper \
+  php8.1-mysql php8.1-intl php8.1-xdebug php-pear php8.1-mail php8.1-mailparse mariadb-client curl wget \
+  php8.1-memcache php8.1-memcached php8.1-gd php8.1-cli php-json php8.1-bcmath unzip php8.1-zip xclip
 
 #RUN a2dismod php7.2
 #RUN a2dismod php7.4
-RUN a2enmod php7.3
+RUN a2enmod php8.1
 
-RUN update-alternatives --set php /usr/bin/php7.3
-RUN update-alternatives --set phar /usr/bin/phar7.3
-RUN update-alternatives --set phar.phar /usr/bin/phar.phar7.3
-#RUN update-alternatives --set phpize /usr/bin/phpize7.3
-#RUN update-alternatives --set php-config /usr/bin/php-config7.3
+RUN update-alternatives --set php /usr/bin/php8.1
+RUN update-alternatives --set phar /usr/bin/phar8.1
+RUN update-alternatives --set phar.phar /usr/bin/phar.phar8.1
+#RUN update-alternatives --set phpize /usr/bin/phpize8.1
+#RUN update-alternatives --set php-config /usr/bin/php-config8.1
 
 RUN apt-get update -y && apt-get upgrade -y
 
@@ -51,8 +51,8 @@ RUN apt-get install --no-install-recommends libmcrypt-dev -y
 
 RUN pecl channel-update pecl.php.net
 RUN mkdir -p /tmp/pear/cache
-RUN pecl install mcrypt-1.0.3
-RUN echo "extension=mcrypt.so" >> /etc/php/7.3/mods-available/mcrypt.ini
+RUN pecl install mcrypt-1.0.6
+RUN echo "extension=mcrypt.so" >> /etc/php/8.1/mods-available/mcrypt.ini
 # /usr/lib/php/20190902/mcrypt.so
 RUN phpenmod mcrypt
 
@@ -60,13 +60,12 @@ RUN apt-get update -y && apt-get upgrade -y
 
 RUN mkdir -p /tmp/sepa/libsepa
 RUN cd /tmp/sepa
-RUN wget https://libsepa.com/downloads/libsepa-2.17-64bit.tar.gz
-RUN tar -xvzf libsepa-2.17-64bit.tar.gz -C /tmp/sepa/libsepa
-RUN cp /tmp/sepa/libsepa/Linux/64bit/php-7.3/sepa.so /usr/lib/php/20190902/
-RUN cp /tmp/sepa/libsepa/Linux/64bit/php-7.3/sepa.so /usr/lib/php/20180731/
+RUN wget https://libsepa.com/downloads/libsepa-2.25-64bit.tar.gz
+RUN tar -xvzf libsepa-2.25-64bit.tar.gz -C /tmp/sepa/libsepa
+RUN cp /tmp/sepa/libsepa/Linux/64bit/php-8.1/sepa.so /usr/lib/php/20210902/
 
 COPY config/php.ini /usr/local/etc/php/php.ini
-COPY config/xdebug.ini /etc/php/7.3/mods-available/xdebug.ini
+COPY config/xdebug.ini /etc/php/8.1/mods-available/xdebug.ini
 COPY config/cloudpower.conf /etc/apache2/sites-available/cloudpower.conf
 
 RUN a2ensite cloudpower.conf

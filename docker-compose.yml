@@ -4,7 +4,7 @@ services:
     image: twitnic/cloudpower:latest
     working_dir: /var/www/cloudpower
     volumes:
-      - ../frontend:/var/www/cloudpower:delegated
+      - ./:/var/www/cloudpower:delegated
       - ~/.ssh/id_rsa:/root/.ssh/id_rsa
       - ~/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub
     environment:
@@ -14,7 +14,7 @@ services:
     depends_on:
       - database
   database:
-    image: mariadb:10.4
+    image: mariadb:11
     volumes:
       - ./db:/var/lib/mysql
     command: mysqld --sql_mode=ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
