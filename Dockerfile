@@ -15,7 +15,7 @@ RUN mkdir /root/.ssh
 RUN touch ~/.ssh/known_hosts
 
 # Create testing directory
-RUN mkdir -p /var/www/cloudpower
+RUN mkdir -p /var/www/cloudpower/publc
 
 RUN apt-get update && apt-get install --no-install-recommends -y locales && rm -rf /var/lib/apt/lists/* \
     && localedef -i de_DE -c -f UTF-8 -A /usr/share/locale/locale.alias de_DE.UTF-8
