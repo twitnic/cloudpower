@@ -23,4 +23,4 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag twitnic/cloudpower:$(date +%s)
     - name: Docker Push
-      run: docker push ${{secrets.DOCKER_USER}}/cloudpower
+      run: docker push ${{secrets.DOCKER_USER}}/cloudpower:latest
